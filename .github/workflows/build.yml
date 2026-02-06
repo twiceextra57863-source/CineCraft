@@ -1,0 +1,51 @@
+name: Build CineCraft Mod (Java 21)
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build Mod
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2️⃣ Set up Java 21
+      - name: Set up Java 21
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 21
+
+      # 3️⃣ Cache Gradle dependencies
+      - name: Cache Gradle
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper/
+          key: gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: gradle-
+
+      # 4️⃣ Grant execute permission to gradlew
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      # 5️⃣ Build the mod
+      - name: Build Mod
+        run: ./gradlew build -Dorg.gradle.java.home=$JAVA_HOME
+
+      # 6️⃣ Upload the generated mod jar
+      - name: Upload Mod Jar
+        uses: actions/upload-artifact@v3
+        with:
+          name: CineCraft-Mod
+          path: build/libs/*.jar
