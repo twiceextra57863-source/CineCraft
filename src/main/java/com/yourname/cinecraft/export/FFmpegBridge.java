@@ -1,26 +1,59 @@
 package com.yourname.cinecraft.export;
 
-import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 /**
- * Bridges Minecraft frames to video using FFmpeg
+ * Bridge between CineCraft and FFmpeg
  */
 public class FFmpegBridge {
 
-    /**
-     * Exports images to video using ffmpeg command
-     * @param inputPattern e.g., frame_%04d.png
-     * @param outputFile e.g., movie.mp4
-     * @param fps frames per second
-     */
-    public static void exportVideo(String inputPattern, String outputFile, int fps) {
-        String cmd = "ffmpeg -y -framerate " + fps + " -i " + inputPattern
-                + " -c:v libx264 -pix_fmt yuv420p " + outputFile;
+    public static void exportVideo(
+            String ffmpegPath,
+            String framePattern,
+            String audioPath,
+            String outputPath,
+            int fps
+    ) {
         try {
-            Process process = Runtime.getRuntime().exec(cmd);
+            ProcessBuilder pb;
+
+            if (audioPath != null) {
+                pb = new ProcessBuilder(
+                        ffmpegPath,
+                        "-y",
+                        "-framerate", String.valueOf(fps),
+                        "-i", framePattern,
+                        "-i", audioPath,
+                        "-c:v", "libx264",
+                        "-pix_fmt", "yuv420p",
+                        "-c:a", "aac",
+                        outputPath
+                );
+            } else {
+                pb = new ProcessBuilder(
+                        ffmpegPath,
+                        "-y",
+                        "-framerate", String.valueOf(fps),
+                        "-i", framePattern,
+                        "-c:v", "libx264",
+                        "-pix_fmt", "yuv420p",
+                        outputPath
+                );
+            }
+
+            pb.redirectErrorStream(true);
+            Process process = pb.start();
+
+            try (BufferedReader reader =
+                         new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+                while (reader.readLine() != null) {}
+            }
+
             process.waitFor();
-            System.out.println("[CineCraft] Export completed: " + outputFile);
-        } catch (IOException | InterruptedException e) {
+            System.out.println("[FFmpeg] Export finished: " + outputPath);
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
