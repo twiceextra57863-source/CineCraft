@@ -1,14 +1,5 @@
-package com.yourname.cinecraft.rendering;
-
-import java.awt.image.BufferedImage;
-
-/**
- * Motion blur effect
- */
-public class MotionBlur {
-
-    public BufferedImage apply(BufferedImage input) {
-        // TODO: implement motion blur
-        return input;
-    }
+// MotionBlur.java
+public BufferedImage apply(BufferedImage input, float intensity){
+    // TODO: blend previous frames for motion blur
+    return input;
 }
