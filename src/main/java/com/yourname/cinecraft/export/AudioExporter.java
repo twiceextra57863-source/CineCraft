@@ -1,19 +1,24 @@
 package com.yourname.cinecraft.export;
 
+import java.io.File;
+
 /**
- * Handles audio export
- * TODO: Implement actual audio rendering/merging with video
+ * Handles audio export for CineCraft
  */
 public class AudioExporter {
 
-    public static void exportAudio(String audioFile, String videoFile, String outputFile) {
-        String cmd = "ffmpeg -y -i " + videoFile + " -i " + audioFile + " -c:v copy -c:a aac " + outputFile;
-        try {
-            Process process = Runtime.getRuntime().exec(cmd);
-            process.waitFor();
-            System.out.println("[CineCraft] Audio merged to video: " + outputFile);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private final File outputFile;
+
+    public AudioExporter(File outputFile) {
+        this.outputFile = outputFile;
+    }
+
+    public void exportAudio() {
+        // Placeholder: real implementation mic / game audio hook se aayega
+        System.out.println("[AudioExporter] Exporting audio to " + outputFile.getAbsolutePath());
+    }
+
+    public File getOutputFile() {
+        return outputFile;
     }
 }
