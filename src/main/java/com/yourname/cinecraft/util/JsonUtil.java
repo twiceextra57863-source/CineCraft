@@ -1,13 +1,23 @@
 package com.yourname.cinecraft.util;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class JsonUtil {
 
-    public static String readJson(File file){
-        try { return Files.readString(file.toPath()); }
-        catch(IOException e){ e.printStackTrace(); return ""; }
+    private static final Gson GSON = new GsonBuilder()
+            .setPrettyPrinting()
+            .create();
+
+    public static Gson gson() {
+        return GSON;
+    }
+
+    public static String toJson(Object obj) {
+        return GSON.toJson(obj);
+    }
+
+    public static <T> T fromJson(String json, Class<T> clazz) {
+        return GSON.fromJson(json, clazz);
     }
 }
