@@ -1,30 +1,38 @@
 package com.yourname.cinecraft.export;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import javax.imageio.ImageIO;
+import java.io.IOException;
 
 /**
- * Captures frames from mod render for export
+ * Captures rendered frames to disk
  */
 public class FrameCapture {
 
-    private int frameCount = 0;
-    private final String outputDir;
+    private final File outputDir;
+    private int frameIndex = 0;
 
-    public FrameCapture(String outputDir) {
+    public FrameCapture(File outputDir) {
         this.outputDir = outputDir;
-        new File(outputDir).mkdirs();
+        if (!outputDir.exists()) outputDir.mkdirs();
     }
 
-    public void captureFrame(BufferedImage img) {
+    public void captureFrame(BufferedImage image) {
+        String name = String.format("frame_%05d.png", frameIndex++);
+        File out = new File(outputDir, name);
         try {
-            String filename = String.format("%s/frame_%04d.png", outputDir, frameCount++);
-            ImageIO.write(img, "png", new File(filename));
-        } catch (Exception e) {
+            ImageIO.write(image, "PNG", out);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void reset() { frameCount = 0; }
+    public File getOutputDir() {
+        return outputDir;
+    }
+
+    public int getFrameCount() {
+        return frameIndex;
+    }
 }
