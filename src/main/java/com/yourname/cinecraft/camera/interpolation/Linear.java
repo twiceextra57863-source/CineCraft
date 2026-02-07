@@ -1,12 +1,8 @@
 package com.yourname.cinecraft.camera.interpolation;
 
-public class Linear {
-
-    public static double interpolate(double a, double b, double t) {
-        return a + (b - a) * t;
-    }
-
-    public static float interpolate(float a, float b, float t) {
-        return a + (b - a) * t;
+public class Linear implements Interpolation {
+    @Override
+    public double interpolate(double start, double end, double alpha) {
+        return start + (end - start) * alpha;
     }
 }
