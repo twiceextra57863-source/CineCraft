@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+
+  "id": "cinecraft",
+  "version": "1.0.0",
+
+  "name": "CineCraft",
+  "description": "A cinematic animation, camera, timeline and rendering system for Minecraft.",
+  "authors": [
+    "Minetwice"
+  ],
+
+  "contact": {
+    "homepage": "https://github.com/twiceextra57863-source/CineCraft",
+    "sources": "https://github.com/twiceextra57863-source/CineCraft",
+    "issues": "https://github.com/twiceextra57863-source/CineCraft/issues"
+  },
+
+  "license": "MIT",
+
+  "icon": "assets/cinecraft/icon.png",
+
+  "environment": "client",
+
+  "entrypoints": {
+    "client": [
+      "com.cinecraft.client.ClientInit"
+    ]
+  },
+
+  "mixins": [
+    "cinecraft.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.15.0",
+    "fabric": "*",
+    "minecraft": ">=1.21",
+    "java": ">=21"
+  },
+
+  "suggests": {
+    "modmenu": "*"
+  }
+}
