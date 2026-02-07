@@ -1,0 +1,39 @@
+{
+  "name": "Punch",
+  "lengthTicks": 20,
+  "keyframes": [
+    {
+      "tick": 0,
+      "position": {"x":0,"y":0,"z":0},
+      "rotation": {"yaw":0,"pitch":0},
+      "rig": {
+        "bones": {
+          "Arm.R": {"x":0,"y":0,"z":0,"rotX":0,"rotY":0,"rotZ":0},
+          "Arm.L": {"x":0,"y":0,"z":0,"rotX":0,"rotY":0,"rotZ":0}
+        }
+      }
+    },
+    {
+      "tick": 10,
+      "position": {"x":0,"y":0,"z":0},
+      "rotation": {"yaw":0,"pitch":0},
+      "rig": {
+        "bones": {
+          "Arm.R": {"x":0,"y":0,"z":0,"rotX":-90,"rotY":0,"rotZ":0},
+          "Arm.L": {"x":0,"y":0,"z":0,"rotX":0,"rotY":0,"rotZ":0}
+        }
+      }
+    },
+    {
+      "tick": 20,
+      "position": {"x":0,"y":0,"z":0},
+      "rotation": {"yaw":0,"pitch":0},
+      "rig": {
+        "bones": {
+          "Arm.R": {"x":0,"y":0,"z":0,"rotX":0,"rotY":0,"rotZ":0},
+          "Arm.L": {"x":0,"y":0,"z":0,"rotX":0,"rotY":0,"rotZ":0}
+        }
+      }
+    }
+  ]
+}
