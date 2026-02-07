@@ -83,5 +83,10 @@ public class CineCraftMod implements ModInitializer {
 
         // Optional: auto-export demo after initialization
         // workflow.export("./minecraft/cinecraft/exports/demo.mp4");
+        // 8️⃣ Play Demo Scene
+DemoScene demo = new DemoScene();
+demo.playScene();
+        
     }
 }
+
